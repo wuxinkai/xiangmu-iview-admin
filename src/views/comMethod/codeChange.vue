@@ -73,10 +73,10 @@
           pk_subctaskapply: "0001G9100000002ERG1Z"
         }
     ]
-        </pre>
+    </pre>
 
     <h1>替换属性名</h1>
-    <pre>
+    <pre style="background:#123;color: #fff;font-size:18px">
       [
       {
         专业类别: "A5",
@@ -111,6 +111,63 @@
       状态: "D2",
       }
       ]
+
+      //结果
+    [
+      {
+        errAry: []
+        name1: "A1"
+        name2: "A2"
+        name3: "A3"
+        name4: "A4"
+        name5: "A5"
+        name6: "A6"
+      }
+    ]
+    </pre>
+
+    <h1>递归下钻增加属性</h1>
+    <pre style="background:#123;color: #fff;font-size:18px">
+      [
+    {
+        "bomnodecd":"14",
+        "bomnodename":"ZJ112卷烟机",
+        "bomnodepk":2,
+        "bompk":1,
+        "bomversionpk":1,
+        "child_nodes":[
+            {
+                "bomnodecd":"1401",
+                "bomnodename":"YJ112供料成条机",
+                "bomnodepk":3,
+                "bompk":1,
+                "bomversionpk":1,
+                "child_nodes":[
+                    {
+                        "bomnodecd":"140101",
+                        "bomnodename":"机架和机壳",
+                        "bomnodepk":4,
+                        "bompk":1,
+                        "bomversionpk":1,
+                        "child_nodes":[
+                            {
+                                "bomnodecd":"14010101",
+                                "bomnodename":"机架",
+                                "bomnodepk":6,
+                                "bompk":1,
+                                "bomversionpk":1,
+                            }
+                        ],
+                       
+  
+                    }
+                ],
+        
+            }
+        ],
+     
+    }
+]
     </pre>
   </div>
 </template>
@@ -258,6 +315,42 @@ export default {
           key: 'name6'
         },
       ],
+      runIn: [
+        {
+          "bomnodecd": "14",
+          "bomnodename": "ZJ112卷烟机",
+          "bomnodepk": 2,
+          "bompk": 1,
+          "bomversionpk": 1,
+          "child_nodes": [
+            {
+              "bomnodecd": "1401",
+              "bomnodename": "YJ112供料成条机",
+              "bomnodepk": 3,
+              "bompk": 1,
+              "bomversionpk": 1,
+              "child_nodes": [
+                {
+                  "bomnodecd": "140101",
+                  "bomnodename": "机架和机壳",
+                  "bomnodepk": 4,
+                  "bompk": 1,
+                  "bomversionpk": 1,
+                  "child_nodes": [
+                    {
+                      "bomnodecd": "14010101",
+                      "bomnodename": "机架",
+                      "bomnodepk": 6,
+                      "bompk": 1,
+                      "bomversionpk": 1,
+                    }
+                  ],
+                }
+              ],
+            }
+          ],
+        }
+      ]
     }
   },
   methods: {
@@ -278,7 +371,6 @@ export default {
         }
       }
       //将数组套数组的方式解析成 数组套对象
-
       return resultArr.flat()
     },
     //格式转化
@@ -330,15 +422,33 @@ export default {
           curAry.push(curRow)
         }
       })
-      console.log(curAry)
-      debugger
+      console.log(666, curAry)
+
       return curAry
     },
-     //判断数据类型
+    //判断数据类型
     isType(value) {
       var reg = new RegExp("^\\[object " + 'Date' + "\\]$", "i");
       return reg.test(Object.prototype.toString.call(value));
     },
+
+    //递归下钻增加属性
+    handrunIn(runVal) {
+      runVal.child_nodes.forEach(item => {
+        item.a_wxk_bomnodecd = item.bomnodecd;
+        item.a_wxk_bomnodename = item.bomnodename;
+        item.a_wxk_bomnodepk = item.bomnodepk;
+        item.a_wxk_bompk = item.bompk;
+        item.a_wxk_bomversionpk = item.bomversionpk;
+        item.a_wxk_child_nodes = item.child_nodes ? item.child_nodes : []; //解决下面如果最后一层没有child_nodes 就不会有length报错问题
+        if (item.a_wxk_child_nodes.length == 0) { 
+          return
+        }
+        this.handrunIn(item)
+      })
+      return runVal
+    },
+
   },
   async mounted() {
     var data = await this.filterNode(transfer_tree, '第四层 1-1-1')
@@ -360,6 +470,9 @@ export default {
     //替换属性名
     let field = this.modifyField(this.attrName)
     console.log(field)
+
+    let runData = this.handrunIn({ child_nodes: this.runIn })
+    console.log(runData)
   }
 }
 </script>
