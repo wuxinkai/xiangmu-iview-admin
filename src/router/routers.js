@@ -133,6 +133,15 @@ export default [
         component: () => import('@/views/single-page/backgroundImg.vue')
       },
       {
+        path: '/banner',
+        name: 'banner',
+        meta: {
+          title: '插入图片轮播效果',
+          icon: 'ios-bug'
+        },
+        component: () => import('@/views/single-page/banner.vue')
+      },
+      {
         path: '/compressImage',
         name: 'compressImage',
         meta: {
@@ -186,6 +195,15 @@ export default [
         component: () => import('@/views/comMethod/animation.vue')
       },
       {
+        path: '/sousuo',
+        name: 'sousuo',
+        meta: {
+          title: '远程搜索',
+          icon: 'md-home'
+        },
+        component: () => import('@/views/comMethod/sousuo.vue')
+      },
+      {
         path: '/animation2',
         name: 'animation2',
         meta: {
@@ -225,7 +243,7 @@ export default [
         path: '/vxeRecursion',
         name: 'vxeRecursion',
         meta: {
-          title: '递归练习',
+          title: '设置日期',
           icon: 'md-home'
         },
         component: () => import('@/views/comMethod/vxeRecursion.vue')
@@ -238,6 +256,15 @@ export default [
           icon: 'md-home'
         },
         component: () => import('@/views/comMethod/codeChange.vue')
+      },
+      {
+        path: '/nodeAjax',
+        name: 'nodeAjax',
+        meta: {
+          title: '请求node的和ajax通讯',
+          icon: 'md-home'
+        },
+        component: () => import('@/views/comMethod/nodeAjax.vue')
       }
     ]
   },
@@ -334,6 +361,23 @@ export default [
           title: 'canvas图形编辑器2'
         },
         component: () => import('@/views/canvasBox/canvas-rect')
+      },
+      {
+        path: 'canvas-spot',
+        name: 'canvas-spot',
+        meta: {
+          icon: 'ios-bug',
+          title: 'canvas显示不同的点在页面上'
+        },
+        component: () => import('@/views/canvasBox/canvas-spot')
+      }, {
+        path: 'drop-spot',
+        name: 'drop-spot',
+        meta: {
+          icon: 'ios-bug',
+          title: 'vue拖拽'
+        },
+        component: () => import('@/views/canvasBox/drop-spot')
       }]
   },
   {
@@ -353,6 +397,15 @@ export default [
           title: 'text下载'
         },
         component: () => import('@/views/download/text-download')
+      },
+      {
+        path: 'html-from-download',
+        name: 'html-from-download',
+        meta: {
+          icon: 'ios-bug',
+          title: 'html打印文件'
+        },
+        component: () => import('@/views/download/html-from-download')
       },
       {
         path: 'img-download',

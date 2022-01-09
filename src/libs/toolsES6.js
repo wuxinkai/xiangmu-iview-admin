@@ -1,8 +1,6 @@
 //求并集 数组对象去重
 export const doubleUnique = (arr, attr, flag = false) => {
-  
   let obj = {}
-  debugger
   if (flag) {
     for (let i = 0; i < arr.length; i++) {
       for (let j = 1; j < arr.length; j++) {
@@ -27,8 +25,8 @@ export const diff = (arr, arr2, attr) => {
 
 //求重叠部分
 export const overlap = (arr, arr2, attr) => {
-  let res = arr.filter(item => {
-    let listCon = arr2.map(v => v[attr])
+  let res = arr.filter(item => {//filter 返回值还是一个数组
+    let listCon = arr2.map(v => v[attr]) //获取数组attr 字段
     return listCon.includes(item[attr])
   })
   return res
@@ -94,3 +92,5 @@ export const getMonthDays = (timeStamp) => {
   let dateString = `${year}-${month}-${date} ${hh}:${mm}:${ss}`;
   return dateString
 }
+
+//修改对象属性

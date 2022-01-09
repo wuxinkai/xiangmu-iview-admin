@@ -12,8 +12,8 @@ export default {
    */
   baseUrl: {
     // dev: 'https://www.easy-mock.com/mock/5c481aed349db30a8801b415/custom-frame/',
-    dev: 'http://localhost:5000/',
-    pro: 'https://produce.com'
+    dev: 'http://localhost:5000/', //本地环境
+    pro: 'http://47.243.139.116/' //线上环境
   },
   uploadFileUrl: 'api/file/uploadFile',
   downloadFileUrl: 'api/file/downloadFile',

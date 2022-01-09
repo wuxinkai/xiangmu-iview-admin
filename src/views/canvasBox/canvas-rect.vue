@@ -4,9 +4,9 @@
   </h1>
     <div style=" display: flex;">
       <div class="box">
-        <!-- <video id="videos" preload autoplay loop muted controls width="800" height="450">
+        <video id="videos" preload autoplay loop muted controls width="800" height="450">
           <source src="./js/minions.mp4" type="video/mp4" />
-        </video> -->
+        </video>
         <canvas id="canvas" width="800" height="450"></canvas>
       </div>
       <img style="float: left;" width="800" height="450" :src="imgSrc" alt="">

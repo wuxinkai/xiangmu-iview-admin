@@ -85,7 +85,6 @@ export default {
       return list
     },
     menuList() {
-      
       return this.$store.getters.menuList
     },
     local() {
@@ -165,6 +164,8 @@ export default {
     }
   },
   mounted() {
+
+    console.log(this.$store.getters.menuList);
     /**
      * @description 初始化设置面包屑导航和标签导航
      */

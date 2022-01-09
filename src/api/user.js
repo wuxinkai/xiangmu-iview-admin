@@ -5,11 +5,8 @@ export const login = ({ userName, password }) => {
     userName,
     password
   }
-  // return axios.request({
-  //   url: 'account/login',
-  //   data,
-  //   method: 'post'
-  // })
+
+  console.log(444,axios);
   return axios.request({
     url: 'login',
     data,

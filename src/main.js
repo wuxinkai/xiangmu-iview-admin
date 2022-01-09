@@ -8,6 +8,7 @@ import installPlugin from '@/plugin'
 import config from '@/config'
 import appConst from '@/utils/const'
 import VueLazyload from "vue-lazyload"; //（1111）图片懒加载
+import qs from 'qs'
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts;
 //引入全局指令
@@ -17,6 +18,7 @@ import jquery from 'jquery' // jquery
 
 
 Vue.prototype.$http = axios;
+Vue.prototype.qs = qs //全局注册，使用方法为:this.qs 它的作用是能把json格式的直接转成data所需的格式
 axios.defaults.baseURL = "/api";
 
 
@@ -41,6 +43,13 @@ import '@/assets/icons/iconfont.css'
 /* 引入vue3新特新 */
 import VueCompositionApi from '@vue/composition-api'
 Vue.use(VueCompositionApi)
+
+
+import Print from 'vue-print-nb'
+
+Vue.use(Print);
+
+
 
 // 实际打包时应该不引入mock
 /* eslint-disable */

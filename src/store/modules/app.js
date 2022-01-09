@@ -15,7 +15,6 @@ import router from '@/router'
 import routers from '@/router/routers'
 import config from '@/config'
 const { homeName } = config
-
 const closePage = (state, route) => {
   const nextRoute = getNextRoute(state.tagNavList, route)
   state.tagNavList = state.tagNavList.filter(item => {
