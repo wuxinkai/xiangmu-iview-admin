@@ -175,7 +175,7 @@
 import { transfer_tree } from '@/assets/json/transferTree'
 export default {
 
-  data() {
+  data () {
     return {
       globalData: [
         { keyName: 'A1', key: '1' },
@@ -355,7 +355,7 @@ export default {
   },
   methods: {
     //递归查询数据
-    filterNode(tree, title) {
+    filterNode (tree, title) {
       if (!title) { return }
       let resultArr = []
       for (let i = 0; i < tree.length; i++) {
@@ -374,7 +374,7 @@ export default {
       return resultArr.flat()
     },
     //格式转化
-    formatConversion(jsonStr) {
+    formatConversion (jsonStr) {
       let nodeAll = []
       jsonStr.forEach((item) => {
         let obj = {}
@@ -388,7 +388,7 @@ export default {
     },
 
     //增加一个key属性，找到跳出循环
-    addattr(nodeData, global) {
+    addattr (nodeData, global) {
       for (var i = 0; i < nodeData.length; i++) {
         for (var j = 0; j < global.length; j++) {
           if (nodeData[i].vbatchno == global[j].keyName) {
@@ -403,7 +403,7 @@ export default {
     },
 
     //
-    modifyField(excelBody) {
+    modifyField (excelBody) {
       let curAry = []
       excelBody.map((excelItem, idx) => {
         let curRow = {}
@@ -427,13 +427,13 @@ export default {
       return curAry
     },
     //判断数据类型
-    isType(value) {
+    isType (value) {
       var reg = new RegExp("^\\[object " + 'Date' + "\\]$", "i");
       return reg.test(Object.prototype.toString.call(value));
     },
 
     //递归下钻增加属性
-    handrunIn(runVal) {
+    handrunIn (runVal) {
       runVal.child_nodes.forEach(item => {
         item.a_wxk_bomnodecd = item.bomnodecd;
         item.a_wxk_bomnodename = item.bomnodename;
@@ -441,7 +441,7 @@ export default {
         item.a_wxk_bompk = item.bompk;
         item.a_wxk_bomversionpk = item.bomversionpk;
         item.a_wxk_child_nodes = item.child_nodes ? item.child_nodes : []; //解决下面如果最后一层没有child_nodes 就不会有length报错问题
-        if (item.a_wxk_child_nodes.length == 0) { 
+        if (item.a_wxk_child_nodes.length == 0) {
           return
         }
         this.handrunIn(item)
@@ -450,7 +450,7 @@ export default {
     },
 
   },
-  async mounted() {
+  async mounted () {
     var data = await this.filterNode(transfer_tree, '第四层 1-1-1')
     console.log(data)
 

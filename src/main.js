@@ -81,6 +81,11 @@ Vue.use(VueLazyload, {
 
 
 
+
+
+
+
+
 //  使用选项注入条码扫描器(添加声音效果)
 //  声音在扫描时会触发
 let options = {

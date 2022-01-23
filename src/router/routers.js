@@ -14,8 +14,7 @@ import Main from '@/components/main/main'
  * }
  */
 
-export default [
-  {
+export default [{
     path: '/login',
     name: 'login',
     meta: {
@@ -33,17 +32,15 @@ export default [
       title: 'activeted'
     },
     component: Main,
-    children: [
-      {
-        path: '/activeter',
-        name: 'activeter',
-        meta: {
-          title: 'activeter作用 和单点登录',
-          icon: 'md-home'
-        },
-        component: () => import('@/views/activeter/activeter.vue')
-      }
-    ]
+    children: [{
+      path: '/activeter',
+      name: 'activeter',
+      meta: {
+        title: 'activeter作用 和单点登录',
+        icon: 'md-home'
+      },
+      component: () => import('@/views/activeter/activeter.vue')
+    }]
   },
   {
     path: '/socketJS',
@@ -53,17 +50,15 @@ export default [
       title: 'socketJS'
     },
     component: Main,
-    children: [
-      {
-        path: '/socket',
-        name: 'socket',
-        meta: {
-          title: 'socketJS的用法',
-          icon: 'md-home'
-        },
-        component: () => import('@/views/socketJS/socket.vue')
-      }
-    ]
+    children: [{
+      path: '/socket',
+      name: 'socket',
+      meta: {
+        title: 'socketJS的用法',
+        icon: 'md-home'
+      },
+      component: () => import('@/views/socketJS/socket.vue')
+    }]
   },
   {
     path: '/storeLasting',
@@ -73,8 +68,7 @@ export default [
       title: '状态持久化'
     },
     component: Main,
-    children: [
-      {
+    children: [{
         path: '/cache',
         name: 'cache',
         meta: {
@@ -104,8 +98,7 @@ export default [
       title: '首页',
       icon: 'md-home'
     },
-    children: [
-      {
+    children: [{
         path: '/home',
         name: 'home',
         meta: {
@@ -160,8 +153,7 @@ export default [
       title: '常用方法'
     },
     component: Main,
-    children: [
-      {
+    children: [{
         path: '/comFn',
         name: 'comFn',
         meta: {
@@ -249,6 +241,15 @@ export default [
         component: () => import('@/views/comMethod/vxeRecursion.vue')
       },
       {
+        path: '/dayjs',
+        name: 'dayjs',
+        meta: {
+          title: '日期插件',
+          icon: 'md-home'
+        },
+        component: () => import('@/views/comMethod/dayjs.vue')
+      },
+      {
         path: '/codeChange',
         name: 'codeChange',
         meta: {
@@ -276,8 +277,7 @@ export default [
       icon: 'ios-bug',
       title: '多级菜单'
     },
-    children: [
-      {
+    children: [{
         path: 'barcodeScanner',
         name: 'barcodeScanner',
         meta: {
@@ -323,17 +323,15 @@ export default [
       title: '生命周期'
     },
     component: Main,
-    children: [
-      {
-        path: 'cycle',
-        name: 'cycle',
-        meta: {
-          icon: 'ios-bug',
-          title: '生命周期'
-        },
-        component: () => import('@/views/cycle-page/cycle')
-      }
-    ]
+    children: [{
+      path: 'cycle',
+      name: 'cycle',
+      meta: {
+        icon: 'ios-bug',
+        title: '生命周期'
+      },
+      component: () => import('@/views/cycle-page/cycle')
+    }]
   },
   {
     path: '/canvasBox',
@@ -343,8 +341,7 @@ export default [
       title: 'canvas图形编辑器'
     },
     component: Main,
-    children: [
-      {
+    children: [{
         path: 'canvas-contant',
         name: 'canvas-contant',
         meta: {
@@ -378,7 +375,8 @@ export default [
           title: 'vue拖拽'
         },
         component: () => import('@/views/canvasBox/drop-spot')
-      }]
+      }
+    ]
   },
   {
     path: '/download',
@@ -388,8 +386,7 @@ export default [
       title: '下载'
     },
     component: Main,
-    children: [
-      {
+    children: [{
         path: 'text-download',
         name: 'text-download',
         meta: {
@@ -430,9 +427,12 @@ export default [
   {
     path: '/echarts',
     name: 'echarts',
+    meta: {
+      icon: 'ios-bug',
+      title: '插件的用法'
+    },
     component: Main,
-    children: [
-      {
+    children: [{
         path: 'maplg',
         name: 'maplg',
         meta: {
@@ -440,6 +440,15 @@ export default [
           title: '对数据进行深度监听'
         },
         component: () => import('@/views/echarts/mapLG.vue')
+      },
+      {
+        path: 'treeChajian',
+        name: 'treeChajian',
+        meta: {
+          icon: 'ios-bug',
+          title: '树插件'
+        },
+        component: () => import('@/views/treeChajian/treeChajian.vue')
       }
     ]
   },
@@ -451,8 +460,7 @@ export default [
       icon: 'ios-stats',
       title: 'table管理'
     },
-    children: [
-      {
+    children: [{
         path: 'container',
         name: 'container',
         meta: {
@@ -545,8 +553,7 @@ export default [
       icon: 'logo-buffer',
       title: '组件'
     },
-    children: [
-      {
+    children: [{
         path: 'table_list',
         name: 'table_list',
         meta: {
@@ -604,11 +611,20 @@ export default [
         path: 'icons_example',
         name: 'icons_example',
         meta: {
-          title: '图标',
+          title: '图标222',
           icon: 'icon-bear'
         },
         component: () => import('@/views/components-example/icons')
-      }
+      },
+      { //日历插件
+        path: "calendar",
+        name: "calendar",
+        meta: {
+          title: '日历',
+          icon: 'icon-bear'
+        },
+        component: () => import('@/views/calendar/calendar.vue'),
+      },
     ]
   },
   {
@@ -620,8 +636,7 @@ export default [
       title: '错误日志'
     },
     component: Main,
-    children: [
-      {
+    children: [{
         path: 'error_store_page',
         name: 'error_store_page',
         meta: {
@@ -630,6 +645,7 @@ export default [
         },
         component: () => import('@/views/error-page/error-store')
       },
+      
       {
         path: 'error_logger_page',
         name: 'error_logger_page',
@@ -672,4 +688,5 @@ export default [
     component: (resolve) => require(["@/views/agent.vue"], resolve),
     meta: {},
   },
+ 
 ]
