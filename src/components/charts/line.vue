@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// import echarts from 'echarts'
 import * as echarts from 'echarts'
 import tdTheme from './theme.json'
 import { on, off } from '@/utils/tools'
@@ -44,7 +45,8 @@ export default {
         },
         series: [{
           data: seriesData,
-          type: 'bar'
+          type: 'line',
+          smooth: true
         }]
       }
       this.dom = echarts.init(this.$refs.dom, 'tdTheme')
