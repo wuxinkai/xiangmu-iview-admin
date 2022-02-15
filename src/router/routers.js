@@ -611,7 +611,7 @@ export default [{
         path: 'icons_example',
         name: 'icons_example',
         meta: {
-          title: '图标222',
+          title: '图标',
           icon: 'icon-bear'
         },
         component: () => import('@/views/components-example/icons')
@@ -624,6 +624,33 @@ export default [{
           icon: 'icon-bear'
         },
         component: () => import('@/views/calendar/calendar.vue'),
+      },
+      { 
+        path: "calendarAll",
+        name: "calendarAll",
+        meta: {
+          title: '日历全部',
+          icon: 'icon-bear'
+        },
+        component: () => import('@/views/calendar/calendarAll.vue'),
+      },
+      { 
+        path: "calendaritem",
+        name: "calendaritem",
+        meta: {
+          title: '日历单件',
+          icon: 'icon-bear'
+        },
+        component: () => import('@/views/calendar/calendaritem.vue'),
+      },
+      { //日历插件
+        path: "timeline",
+        name: "timeline",
+        meta: {
+          title: '日历时间轴',
+          icon: 'icon-bear'
+        },
+        component: () => import('@/views/calendar/timeline.vue'),
       },
     ]
   },
@@ -645,7 +672,6 @@ export default [{
         },
         component: () => import('@/views/error-page/error-store')
       },
-      
       {
         path: 'error_logger_page',
         name: 'error_logger_page',
@@ -656,6 +682,7 @@ export default [{
         },
         component: () => import('@/views/single-page/error-logger')
       },
+      
     ]
   },
   {
