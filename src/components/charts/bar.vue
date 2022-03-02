@@ -7,6 +7,7 @@ import * as echarts from 'echarts'
 import tdTheme from './theme.json'
 import { on, off } from '@/utils/tools'
 echarts.registerTheme('tdTheme', tdTheme)
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
   name: 'ChartBar',
   props: {
@@ -22,6 +23,17 @@ export default {
   methods: {
     resize () {
       this.dom.resize()
+    }
+  },
+    computed: {
+    ...mapGetters(['getSpanData']),
+  },
+  watch: {
+    getSpanData(newdata, olddata) {
+      let _this = this
+      this.$nextTick(() => {
+        _this.dom.resize()
+      })
     }
   },
   mounted () {
@@ -48,7 +60,9 @@ export default {
         }]
       }
       this.dom = echarts.init(this.$refs.dom, 'tdTheme')
+      
       this.dom.setOption(option)
+
       on(window, 'resize', this.resize)
     })
   },

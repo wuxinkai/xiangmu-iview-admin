@@ -19,7 +19,7 @@
           <chart-bar style="height: 300px;" :value="barData" text="每周用户活跃量" />
         </Card>
       </i-col>
-      setspan
+
     </Row>
     <Row :gutter="20" style="margin-top: 10px;">
       <Button @click="getData(1)" type="primary">新增1</Button>
@@ -62,6 +62,7 @@
 <script>
 import InforCard from '@/components/info-card/info-card'
 import { ChartPie, ChartBar, ChartLine } from '@/components/charts'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
   name: 'home',
   components: {
@@ -70,7 +71,7 @@ export default {
     ChartBar,
     ChartLine
   },
-  data () {
+  data() {
     return {
       oSpan: 12,
       addCardList: [],
@@ -104,25 +105,40 @@ export default {
         },
         { title: '新增页面', icon: 'md-map', count: 14, color: '#9A66E4' }
       ],
-      pieData: [],
-      barData: {}
+      pieData: [
+        { value: this.uniqueId(), name: '直接访问' },
+        { value: this.uniqueId(), name: '邮件营销' },
+        { value: this.uniqueId(), name: '联盟广告' },
+        { value: this.uniqueId(), name: '视频广告' },
+        { value: this.uniqueId(), name: '搜索引擎' }
+      ],
+      barData: {
+        Mon: this.uniqueId(),
+        Tue: this.uniqueId(),
+        Wed: this.uniqueId(),
+        Thu: this.uniqueId(),
+        Fri: this.uniqueId(),
+        Sat: this.uniqueId(),
+        Sun: this.uniqueId()
+      }
     }
   },
-  mounted () {
+  mounted() {
     //
 
     console.log(this)
   },
   methods: {
+    ...mapMutations(['setSpanData']),
     //
-    uniqueId () {
+    uniqueId() {
       var num = '';
       for (var i = 0; i < 3; i++) {
         num += Math.floor(Math.random() * 10);
       }
       return num
     },
-    async setpar () {
+    async setpar() {
       let p = await new Promise(function (resolve, reject) {
         setTimeout(function () {
           resolve('要返回的数据可以任何数据例如接口返回数据');
@@ -131,21 +147,19 @@ export default {
       return p
     },
     //获取数据
-    getData (data) {
+    getData(data) {
       let _this = this
-
+      _this.barData = {
+        Mon: this.uniqueId(),
+        Tue: this.uniqueId(),
+        Wed: this.uniqueId(),
+        Thu: this.uniqueId(),
+        Fri: this.uniqueId(),
+        Sat: this.uniqueId(),
+        Sun: this.uniqueId()
+      }
       if (data == 1 || data == 3) {
-        setTimeout(v => {
-          _this.barData = {
-            Mon: this.uniqueId(),
-            Tue: this.uniqueId(),
-            Wed: this.uniqueId(),
-            Thu: this.uniqueId(),
-            Fri: this.uniqueId(),
-            Sat: this.uniqueId(),
-            Sun: this.uniqueId()
-          }
-        }, 1200)
+
 
       } else if (data == 2) {
         this.barData = [
@@ -159,16 +173,17 @@ export default {
       let curitem = this.cardList.find(
         v => v.value == data
       )
-      debugger
+
       curitem.chartsData = this.barData
       this.addCardList.push(curitem)
     },
     //分栏
-    setspan (flag) {
+    setspan(flag) {
       this.oSpan = flag ? 24 : 12
+      this.setSpanData(this.oSpan)
     },
     //删除
-    hanleDelete (item, index) {
+    hanleDelete(item, index) {
       this.addCardList.splice(index, 1);
     }
   }
@@ -177,7 +192,7 @@ export default {
 
 <style lang="less">
 .count-style {
-  font-size: 50px;
+  font-size: 20px;
 }
 
 .fade-enter-active,

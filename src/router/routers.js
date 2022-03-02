@@ -108,6 +108,15 @@ export default [{
         component: () => import('@/views/single-page/home')
       },
       {
+        path: '/tuaozhuai',
+        name: 'tuaozhuai',
+        meta: {
+          title: '拖拽',
+          icon: 'md-home'
+        },
+        component: () => import('@/views/single-page/tuaozhuai')
+      },
+      {
         path: '/vueImgPosition',
         name: 'vueImgPosition',
         meta: {
@@ -515,6 +524,16 @@ export default [{
           icon: 'md-git-branch'
         },
         component: () => import('@/views/example/listpage')
+      },
+      {
+        path: 'page_tao',
+        name: 'page_tao',
+        meta: {
+          title: '表格嵌套',
+          notCache: true,
+          icon: 'md-git-branch'
+        },
+        component: () => import('@/views/example/listtao')
       },
       {
         path: 'dynamic_edit',

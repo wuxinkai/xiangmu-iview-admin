@@ -6,6 +6,7 @@
 import * as echarts from 'echarts'
 import tdTheme from './theme.json'
 import { on, off } from '@/utils/tools'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 echarts.registerTheme('tdTheme', tdTheme)
 export default {
   name: 'ChartPie',
@@ -14,17 +15,28 @@ export default {
     text: String,
     subtext: String
   },
-  data () {
+  data() {
     return {
       dom: null
     }
   },
   methods: {
-    resize () {
+    resize() {
       this.dom.resize()
     }
   },
-  mounted () {
+  computed: {
+    ...mapGetters(['getSpanData']),
+  },
+  watch: {
+    getSpanData(newdata, olddata) {
+      let _this = this
+      this.$nextTick(() => {
+        _this.dom.resize()
+      })
+    }
+  },
+  mounted() {
     this.$nextTick(() => {
       let legend = this.value.map(_ => _.name)
       let option = {
@@ -63,7 +75,7 @@ export default {
       on(window, 'resize', this.resize)
     })
   },
-  beforeDestroy () {
+  beforeDestroy() {
     off(window, 'resize', this.resize)
   }
 }
