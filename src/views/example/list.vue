@@ -1,6 +1,7 @@
 <template>
   <div>
-    <big-img v-if="showImg" :imgSrc="imgSrc" :imgPosition="imgPosition" :tableHeight="$refs.tables.$el.offsetHeight"></big-img>
+    <big-img v-if="showImg" :imgSrc="imgSrc" :imgPosition="imgPosition"
+      :tableHeight="$refs.tables.$el.offsetHeight"></big-img>
     <Card>
       <div class="search-con">
         <Input class="search-input" placeholder="请输入姓名" v-model="searchData.name" />
@@ -15,17 +16,20 @@
       <div class="tables-bar">
         <Button type="primary" class="tables-btn" @click="handleCreate()">添加</Button>
       </div>
-      <Table ref="tables" stripe :columns="columns" :data="tableData" sortable="custom" @on-sort-change="handleSortChange">
-        <template slot-scope="{ row }" slot="gender">{{ row.gender | getConstLabel($appConst.enum.user_gender) }}</template>
+      <Table ref="tables" stripe :columns="columns" :data="tableData" sortable="custom"
+        @on-sort-change="handleSortChange">
+        <template slot-scope="{ row }" slot="gender">{{ row.gender | getConstLabel($appConst.enum.user_gender)
+        }}</template>
         <template slot-scope="{ row, index }" slot="action">
-          <Button size="small" @click="handleShow(row,index)">查看</Button>
-          <Button size="small" class="tables-row-btn" @click="handleEdit(row,index)">编辑</Button>
-          <Button size="small" class="tables-row-btn" @click="handleEditJobs(row,index)">工作</Button>
-          <Button size="small" class="tables-row-btn" @click="handleDelete(row,index)">删除</Button>
+          <Button size="small" @click="handleShow(row, index)">查看</Button>
+          <Button size="small" class="tables-row-btn" @click="handleEdit(row, index)">编辑</Button>
+          <Button size="small" class="tables-row-btn" @click="handleEditJobs(row, index)">工作</Button>
+          <Button size="small" class="tables-row-btn" @click="handleDelete(row, index)">删除</Button>
         </template>
       </Table>
       <div class="pages">
-        <Page v-show="total>0" @on-change="handlePageChange" @on-page-size-change="handlePageSizeChange" :total="total" show-sizer show-total show-elevator />
+        <Page v-show="total > 0" @on-change="handlePageChange" @on-page-size-change="handlePageSizeChange" :total="total"
+          show-sizer show-total show-elevator />
       </div>
     </Card>
     <Modal class-name="vertical-center-modal">
@@ -76,7 +80,53 @@ export default {
           }
         },
         { title: '性别', key: 'gender', slot: 'gender', sortable: true },
-        { title: '地址', key: 'address', sortable: true },
+        { title: 'ID', key: 'id', sortable: true },
+        {
+          title: '计算结果',
+          key: 'order_amount',
+          width: 180,
+          render: (h, params) => {
+            const amount = params.row.order_amount
+            const channels = params.row.channels
+            let weiXin, zhiFuBao, xianJin, yinHang, yiBao, chuXun, gouWu
+            for (var k in channels) {
+              if (channels[k].payment_channel === '微信支付') {
+                weiXin = channels[k].payment_money
+              }
+              if (channels[k].payment_channel === '支付宝') {
+                zhiFuBao = channels[k].payment_money
+              }
+              if (channels[k].payment_channel === '现金') {
+                xianJin = channels[k].payment_money
+              }
+              if (channels[k].payment_channel === '银行卡') {
+                yinHang = channels[k].payment_money
+              }
+              if (channels[k].payment_channel === '医保卡') {
+                yiBao = channels[k].payment_money
+              }
+              if (channels[k].payment_channel === '储值卡') {
+                chuXun = channels[k].payment_money
+              }
+              if (channels[k].payment_channel === '购物券') {
+                gouWu = channels[k].payment_money
+              }
+            }
+            return h('Tooltip', {
+              props: { placement: 'right', transfer: true, theme: 'light', minWidth: '310' }
+            }, [
+              [h('div', { style: { color: '#3A70EC', width: '30px' } }, `${amount}`)],
+              h('div', { slot: 'content', style: { width: '150px', lineHeight: '30px', textAlign: 'center', borderBottom: '1px solid #E3E7F6' } }, '支付方式&金额'),
+              h('div', { slot: 'content', style: { lineHeight: '30px', borderBottom: '1px dashed #E3E7F6' } }, `微信：${weiXin}`),
+              h('div', { slot: 'content', style: { lineHeight: '30px', borderBottom: '1px dashed #E3E7F6' } }, `支付宝：${zhiFuBao}`),
+              h('div', { slot: 'content', style: { lineHeight: '30px', borderBottom: '1px dashed #E3E7F6' } }, `现金：${xianJin}`),
+              h('div', { slot: 'content', style: { lineHeight: '30px', borderBottom: '1px dashed #E3E7F6' } }, `银行卡：${yinHang}`),
+              h('div', { slot: 'content', style: { lineHeight: '30px', borderBottom: '1px dashed #E3E7F6' } }, `医保卡：${yiBao}`),
+              h('div', { slot: 'content', style: { lineHeight: '30px', borderBottom: '1px dashed #E3E7F6' } }, `储蓄卡：${chuXun}`),
+              h('div', { slot: 'content', style: { lineHeight: '30px' } }, `购物卷：${gouWu}`)
+            ])
+          }
+        },
         { title: '创建时间', key: 'createTime', sortable: true },
         { title: '操作', key: 'action', slot: 'action', width: 220 }
       ],
@@ -146,13 +196,13 @@ export default {
     },
     handlePageChange(page) {
       //显示多少条
-      debugger
+
       this.searchData.page = page
       this.searchExamples()
     },
     //跳过多少条
     handlePageSizeChange(pageSize) {
-      debugger
+
       this.searchData.pageSize = pageSize
       this.searchExamples()
     },
@@ -164,6 +214,7 @@ export default {
       fetchPages(this.searchData).then(res => {
 
         this.tableData = res.data.list
+
         this.total = res.data.total
         this.tableData = this.tableData.map(v => { return { ...v, image: require('../../assets/images/秋田犬.jpg') } })
       })
@@ -192,5 +243,4 @@ export default {
   }
 }
 </script>
-<style>
-</style>
+<style></style>
